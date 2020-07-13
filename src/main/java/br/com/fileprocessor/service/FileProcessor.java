@@ -28,6 +28,7 @@ import br.com.fileprocessor.util.FileUtilities;
 public class FileProcessor implements Processor<File> {
 
 	private static final Logger log = LoggerFactory.getLogger(FileProcessor.class);
+	private static final Integer TYPE_LENGTH = 3;
 
 	private String outputDir;
 	private String outputFileExtension;
@@ -41,12 +42,12 @@ public class FileProcessor implements Processor<File> {
 	public void process(File file) {
 
 		try {
-			DataModel dataModel = new DataModel(buildModelMap(file));
+			SalesData salesData = new SalesData(buildModelMap(file));
 
-			String numberOfCustomers = String.format("Quantidade de clientes no arquivo de entrada: %s", Reports.numberOfCustomers(dataModel));
-			String numberOfSalesmen = String.format("Quantidade de vendedor no arquivo de entrada: %s", Reports.numberOfSalesmens(dataModel));
-			String mostExpensiveSaleId = String.format("ID da venda mais cara: %s", Reports.mostExpensiveSale(dataModel).getSaleId());
-			String worstSalesmanName = String.format("Pior vendedor: %s", Reports.worstSalesman(dataModel));
+			String numberOfCustomers = String.format("Quantidade de clientes no arquivo de entrada: %s", Reports.getNumberOfCustomers(salesData));
+			String numberOfSalesmen = String.format("Quantidade de vendedor no arquivo de entrada: %s", Reports.getNumberOfSalesmen(salesData));
+			String mostExpensiveSaleId = String.format("ID da venda mais cara: %s", Reports.getMostExpensiveSale(salesData).getSaleId());
+			String worstSalesmanName = String.format("Pior vendedor: %s", Reports.getWorstSalesman(salesData));
 
 			String outputFileName = FilenameUtils.getBaseName(file.getName()).concat(outputFileExtension);
 			Path path = Paths.get(outputDir, outputFileName);
@@ -73,8 +74,8 @@ public class FileProcessor implements Processor<File> {
 		try (LineIterator iterator = FileUtils.lineIterator(file, StandardCharsets.UTF_8.toString())) {
 			while (iterator.hasNext()) {
 				String line = iterator.nextLine();
-				if (line != null && line.length() > 3) {
-					String type = StringUtils.substring(line, 0, 3);
+				if (line != null && line.length() > TYPE_LENGTH) {
+					String type = StringUtils.substring(line, 0, TYPE_LENGTH);
 					Parser<String, String[]> parser = ParserFactory.create(type);
 					Converter<String[], Model> converter = ConverterFactory.create(type);
 					Model model = converter.convert(parser.parse(line));
