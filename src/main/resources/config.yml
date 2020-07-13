@@ -1,0 +1,7 @@
+dataInputDir: data/in
+dataOutputDir: data/out
+dataInputFileExtension: .dat
+dataOutputFileExtension: .done.dat
+
+dirPoolingIntervalInSeconds: 10
+
