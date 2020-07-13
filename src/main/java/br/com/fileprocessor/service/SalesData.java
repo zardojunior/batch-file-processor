@@ -6,13 +6,13 @@ import java.util.Set;
 import br.com.fileprocessor.model.Model;
 
 /**
- * Class that encapsulates all Model data.
+ * Class that encapsulates all sales data.
  */
-public class DataModel {
+public class SalesData {
 
 	private Map<String, Set<Model>> map;
 
-	public DataModel(Map<String, Set<Model>> map) {
+	public SalesData(Map<String, Set<Model>> map) {
 		this.map = map;
 	}
 
