@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
@@ -77,7 +78,9 @@ public class FileProcessor implements Processor<File> {
 				if (line != null && line.length() > TYPE_LENGTH) {
 					String type = StringUtils.substring(line, 0, TYPE_LENGTH);
 					Parser<String, String[]> parser = ParserFactory.create(type);
+					Objects.requireNonNull(parser, "No parser found on factory to parse row " + line);
 					Converter<String[], Model> converter = ConverterFactory.create(type);
+					Objects.requireNonNull(parser, "No converter found on factory to convert row " + line);
 					Model model = converter.convert(parser.parse(line));
 					addModelToMap(model, modelMap);
 				} else {
