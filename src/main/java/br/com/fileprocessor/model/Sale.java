@@ -80,7 +80,7 @@ public class Sale implements Model {
 	}
 
 	@Override
-	public String getModelType() {
+	public String getType() {
 		return TYPE;
 	}
 

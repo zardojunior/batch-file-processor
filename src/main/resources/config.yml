@@ -1,7 +1,19 @@
-dataInputDir: data/in
-dataOutputDir: data/out
-dataInputFileExtension: .dat
-dataOutputFileExtension: .done.dat
+###############################################
+### Batch File Processor Configuration File ###
+###############################################
 
-dirPoolingIntervalInSeconds: 10
+# Input directory relative to the system user directory
+inputDir: data/in
+
+# Output directory relative to the system user directory
+outputDir: data/out
+
+# Source file extension
+inputFileExtension: .dat
+
+# Target file extension
+outputFileExtension: .done.dat
+
+# The amount of time in seconds to wait between checks of the input directory
+poolingIntervalInSeconds: 10
 

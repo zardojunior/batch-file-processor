@@ -1,10 +1,8 @@
 package br.com.fileprocessor.parser;
 
-import java.util.function.Function;
-
 import br.com.fileprocessor.model.Customer;
 
-public class CustomerParser implements Function<String, String[]> {
+public class CustomerParser implements Parser<String, String[]> {
 
 	private static final char SEP = 'ç';
 
@@ -35,7 +33,7 @@ public class CustomerParser implements Function<String, String[]> {
 	}
 
 	@Override
-	public String[] apply(String string) {
+	public String[] parse(String string) {
 		return regexParser.parse(string);
 	}
 

@@ -2,58 +2,76 @@ package br.com.fileprocessor.config;
 
 public class Configuration {
 
-	private String dataInputDir;
-	private String dataOutputDir;
-	private String dataInputFileExtension;
-	private String dataOutputFileExtension;
-	private Integer dirPoolingIntervalInSeconds;
+	/**
+	 * The source directory for the files to be processed.
+	 */
+	private String inputDir;
 
-	public String getDataInputDir() {
-		return dataInputDir;
+	/**
+	 * The target directory where the processed files will be stored.
+	 */
+	private String outputDir;
+
+	/**
+	 * The file extension of the source files.
+	 */
+	private String inputFileExtension;
+
+	/**
+	 * The file extension of the processed files.
+	 */
+	private String outputFileExtension;
+
+	/**
+	 * The amount of time in seconds to wait between checks of the input directory.
+	 */
+	private Integer poolingIntervalInSeconds;
+
+	public String getInputDir() {
+		return inputDir;
 	}
 
-	public void setDataInputDir(String dataInputDir) {
-		this.dataInputDir = dataInputDir;
+	public void setInputDir(String inputDir) {
+		this.inputDir = inputDir;
 	}
 
-	public String getDataOutputDir() {
-		return dataOutputDir;
+	public String getOutputDir() {
+		return outputDir;
 	}
 
-	public void setDataOutputDir(String dataOutputDir) {
-		this.dataOutputDir = dataOutputDir;
+	public void setOutputDir(String outputDir) {
+		this.outputDir = outputDir;
 	}
 
-	public String getDataInputFileExtension() {
-		return dataInputFileExtension;
+	public String getInputFileExtension() {
+		return inputFileExtension;
 	}
 
-	public void setDataInputFileExtension(String dataInputFileExtension) {
-		this.dataInputFileExtension = dataInputFileExtension;
+	public void setInputFileExtension(String inputFileExtension) {
+		this.inputFileExtension = inputFileExtension;
 	}
 
-	public String getDataOutputFileExtension() {
-		return dataOutputFileExtension;
+	public String getOutputFileExtension() {
+		return outputFileExtension;
 	}
 
-	public void setDataOutputFileExtension(String dataOutputFileExtension) {
-		this.dataOutputFileExtension = dataOutputFileExtension;
+	public void setOutputFileExtension(String outputFileExtension) {
+		this.outputFileExtension = outputFileExtension;
 	}
 
-	public Integer getDirPoolingIntervalInSeconds() {
-		return dirPoolingIntervalInSeconds;
+	public Integer getPoolingIntervalInSeconds() {
+		return poolingIntervalInSeconds;
 	}
 
-	public void setDirPoolingIntervalInSeconds(Integer dirPoolingIntervalInSeconds) {
-		this.dirPoolingIntervalInSeconds = dirPoolingIntervalInSeconds;
+	public void setPoolingIntervalInSeconds(Integer poolingIntervalInSeconds) {
+		this.poolingIntervalInSeconds = poolingIntervalInSeconds;
 	}
 
 	@Override
 	public String toString() {
 		return String.format(
-				"Configuration [dataInputDir=%s,dataOutputDir=%s, dataInputFileExtension=%s, dataOutputFileExtension=%s, dirPoolingIntervalInSeconds=%s]",
-				dataInputDir, dataOutputDir, dataInputFileExtension, dataOutputFileExtension,
-				dirPoolingIntervalInSeconds);
+				"Configuration [inputDir=%s, outputDir=%s, inputFileExtension=%s, outputFileExtension=%s, poolingIntervalInSeconds=%s]",
+				inputDir, outputDir, inputFileExtension, outputFileExtension, poolingIntervalInSeconds);
 	}
 
 }

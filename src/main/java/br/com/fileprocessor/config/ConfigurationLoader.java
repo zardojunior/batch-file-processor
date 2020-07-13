@@ -26,7 +26,7 @@ public class ConfigurationLoader {
 	public static <T> T load(InputStream inputStream, Class<?> targetClass) {
 		Yaml yaml = new Yaml(new Constructor(targetClass));
 		T configuration = yaml.load(inputStream);
-		log.info("Configuration successfully loaded: {}", configuration);
+		log.info("Configuration successfully loaded");
 		return configuration;
 	}
 

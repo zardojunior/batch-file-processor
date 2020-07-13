@@ -6,9 +6,9 @@ import org.apache.commons.io.monitor.FileAlterationListenerAdaptor;
 
 public class FileListener extends FileAlterationListenerAdaptor {
 
-	private FileProcessor processor;
+	private Processor<File> processor;
 
-	public FileListener(FileProcessor processor) {
+	public FileListener(Processor<File> processor) {
 		this.processor = processor;
 	}
 
