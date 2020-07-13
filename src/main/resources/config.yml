@@ -15,5 +15,5 @@ inputFileExtension: .dat
 outputFileExtension: .done.dat
 
 # The amount of time in seconds to wait between checks of the input directory
-poolingIntervalInSeconds: 10
+poolingIntervalInSeconds: 20
 

@@ -31,7 +31,7 @@ public class FileMonitorService {
 	public void start() throws Exception {
 		invokeFileCreationOnListeners();
 		monitor.start();
-		log.info("File monitor started! {}", monitor);
+		log.info("File monitor started! {}", monitor.getObservers());
 	}
 
 	/**

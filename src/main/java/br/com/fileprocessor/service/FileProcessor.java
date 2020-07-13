@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -24,6 +23,7 @@ import br.com.fileprocessor.factory.ParserFactory;
 import br.com.fileprocessor.model.Model;
 import br.com.fileprocessor.parser.Parser;
 import br.com.fileprocessor.report.Reports;
+import br.com.fileprocessor.util.FileUtilities;
 
 public class FileProcessor implements Processor<File> {
 
@@ -46,14 +46,11 @@ public class FileProcessor implements Processor<File> {
 			String numberOfCustomers = String.format("Quantidade de clientes no arquivo de entrada: %s", Reports.numberOfCustomers(dataModel));
 			String numberOfSalesmen = String.format("Quantidade de vendedor no arquivo de entrada: %s", Reports.numberOfSalesmens(dataModel));
 			String mostExpensiveSaleId = String.format("ID da venda mais cara: %s", Reports.mostExpensiveSale(dataModel).getSaleId());
-			String worstSalesmanName = String.format("Pior vendedor: %s", ""); // FIXME
+			String worstSalesmanName = String.format("Pior vendedor: %s", Reports.worstSalesman(dataModel));
 
 			String outputFileName = FilenameUtils.getBaseName(file.getName()).concat(outputFileExtension);
 			Path path = Paths.get(outputDir, outputFileName);
-			FileUtils.writeLines(
-					path.toFile(),
-					StandardCharsets.UTF_8.toString(),
-					Arrays.asList(numberOfCustomers, numberOfSalesmen, mostExpensiveSaleId, worstSalesmanName));
+			FileUtilities.writeLinesToFile(path.toFile(), numberOfCustomers, numberOfSalesmen, mostExpensiveSaleId, worstSalesmanName);
 
 			log.info("File processed: {}", file.getName());
 

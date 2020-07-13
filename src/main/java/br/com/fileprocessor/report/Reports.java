@@ -1,10 +1,16 @@
 package br.com.fileprocessor.report;
 
+import java.math.BigDecimal;
 import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import br.com.fileprocessor.model.Customer;
 import br.com.fileprocessor.model.Sale;
-import br.com.fileprocessor.model.Salesman;
 import br.com.fileprocessor.service.DataModel;
 
 public class Reports {
@@ -33,12 +39,48 @@ public class Reports {
 		return data.getModelsOfType(Customer.TYPE).size();
 	}
 
+	/**
+	 * Returns the salesman name with the lowest total sales amount.
+	 *
+	 * @param data the {@link DataModel} instance containing all models read
+	 * @return the salesman name with the lowest total sales amount
+	 */
+	public static final String worstSalesman(DataModel data) {
 
-	public static final Salesman worstSalesman(DataModel data) {
-		data.getModelsOfType(Salesman.TYPE);
+		// Can we have salesmen without sale?
 
-		// FIXME
+		// Grouping sales per salesman name
+		Map<String, List<Sale>> salesGroupBySalesmanName = data.getModelsOfType(Sale.TYPE)
+				.stream()
+				.map(s -> (Sale)s)
+				.collect(Collectors.groupingBy(Sale::getSalesmanName));
+
+		// Calculating sales total per salesman name
+		Map<String, BigDecimal> totalPerSalesmanName = new LinkedHashMap<>();
+		for (Entry<String, List<Sale>> entry : salesGroupBySalesmanName.entrySet()) {
+			totalPerSalesmanName.put(entry.getKey(), totalSalesPrice(entry.getValue()));
+		}
+
+		// Sorting per value (ascending)
+		Optional<Map.Entry<String,BigDecimal>> sortedTotals =	totalPerSalesmanName.entrySet().stream()
+				.sorted(Map.Entry.comparingByValue()).findFirst();
+
+		if (sortedTotals.isPresent()) {
+			return sortedTotals.get().getKey();
+		}
 		return null;
+	}
+
+	/**
+	 * Returns the sum of all sales in the collection.
+	 *
+	 * @param sales the sales whose total prices will be summed
+	 * @return the sum of sales total prices
+	 */
+	public static final BigDecimal totalSalesPrice(List<Sale> sales) {
+		return sales.stream()
+				.map(Sale::getTotalPrice)
+				.reduce(BigDecimal.ZERO, BigDecimal::add);
 	}
 
 	/**

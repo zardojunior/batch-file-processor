@@ -8,7 +8,6 @@ import br.com.fileprocessor.parser.Parser;
 import br.com.fileprocessor.parser.SaleParser;
 import br.com.fileprocessor.parser.SalesmanParser;
 
-
 public class ParserFactory {
 
 	public static final String SALE_TYPE = Sale.TYPE;

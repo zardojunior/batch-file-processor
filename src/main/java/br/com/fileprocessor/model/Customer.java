@@ -92,4 +92,5 @@ public class Customer implements Model {
 	public String toString() {
 		return String.format("Customer [cnpj=%s, name=%s, businessArea=%s]", cnpj, name, businessArea);
 	}
+
 }

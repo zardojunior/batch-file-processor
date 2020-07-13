@@ -3,8 +3,11 @@ package br.com.fileprocessor.util;
 import static org.apache.commons.io.FileUtils.getUserDirectoryPath;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.Collection;
 
 import org.apache.commons.io.FileUtils;
@@ -45,11 +48,15 @@ public class FileUtilities {
 	/**
 	 * Write the lines into the given file.
 	 *
-	 * @param fileName the file to write the lines into
+	 * @param file the file to write the lines into
 	 * @param lines the lines to write
+	 * @throws IOException
 	 */
-	public static void writeLinesToFile(String fileName, String...lines) {
-
+	public static void writeLinesToFile(File file, String...lines) throws IOException {
+		FileUtils.writeLines(
+				file,
+				StandardCharsets.UTF_8.toString(),
+				Arrays.asList(lines));
 	}
 
 }
