@@ -4,15 +4,15 @@ import br.com.fileprocessor.model.Salesman;
 
 public class SalesmanParser implements Parser<String, String[]> {
 
-	private static final char SEP = 'ç';
+	private static final char SEP = 'Ã§';
 
 	private RegexParser regexParser;
 
 	/**
 	 * The salesman row format is
-	 * <pre>001çCPFçNameçSalary</pre>
+	 * <pre>001Ã§CPFÃ§NameÃ§Salary</pre>
 	 * Regex must match the following example:
-	 * <pre>001ç3245678865434çPauloç40000.99</pre>
+	 * <pre>001Ã§3245678865434Ã§PauloÃ§40000.99</pre>
 	 * Note: officially the CPF length is 11, but in the sample data was 13
 	 */
 	public static final String DEFAULT_REGEX = "("+Salesman.TYPE+")"+SEP+"(\\d{11,13})"+SEP+"(.*)"+SEP+"(.*)";

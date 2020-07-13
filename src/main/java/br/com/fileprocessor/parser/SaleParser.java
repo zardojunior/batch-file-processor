@@ -4,15 +4,15 @@ import br.com.fileprocessor.model.Sale;
 
 public class SaleParser implements Parser<String, String[]> {
 
-	private static final char SEP = 'ç';
+	private static final char SEP = 'Ã§';
 
 	private RegexParser regexParser;
 
 	/**
 	 * The sale row format is
-	 * <pre>003çSale IDç[Item ID-Item Quantity-Item Price]çSalesman name</pre>
+	 * <pre>003Ã§Sale IDÃ§[Item ID-Item Quantity-Item Price]Ã§Salesman name</pre>
 	 * Regex must match the following example:
-	 * <pre>003ç10ç[1-10-100,2-30-2.50,3-40-3.10]çPedro</pre>
+	 * <pre>003Ã§10Ã§[1-10-100,2-30-2.50,3-40-3.10]Ã§Pedro</pre>
 	 */
 	public static final String DEFAULT_REGEX = "("+Sale.TYPE+")"+SEP+"(\\d*)"+SEP+"(.*)"+SEP+"(.*)";
 

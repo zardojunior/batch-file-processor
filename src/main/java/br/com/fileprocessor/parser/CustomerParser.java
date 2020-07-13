@@ -4,15 +4,15 @@ import br.com.fileprocessor.model.Customer;
 
 public class CustomerParser implements Parser<String, String[]> {
 
-	private static final char SEP = 'ç';
+	private static final char SEP = 'Ã§';
 
 	private RegexParser regexParser;
 
 	/**
 	 * The customer row format is
-	 * <pre>002çCNPJçNameçBusiness Area</pre>
+	 * <pre>002Ã§CNPJÃ§NameÃ§Business Area</pre>
 	 * Regex must match the following example:
-	 * <pre>002ç2345675433444345çEduardo PereiraçRural</pre>
+	 * <pre>002Ã§2345675433444345Ã§Eduardo PereiraÃ§Rural</pre>
 	 */
 	private static final String DEFAULT_REGEX = "("+Customer.TYPE+")"+SEP+"(\\d{14,16})"+SEP+"(.*)"+SEP+"(.*)";
 
