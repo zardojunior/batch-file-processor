@@ -12,11 +12,11 @@ public class SalesmanConverter implements Converter<String[], Model> {
 	@Override
 	public Salesman convert(String[] data) {
 		try {
-			Salesman salesman = new Salesman();
-			salesman.setCpf(data[1]);
-			salesman.setName(data[2]);
-			salesman.setSalary(new BigDecimal(data[3]));
-			return salesman;
+			return Salesman.builder()
+					.withCpf(data[1])
+					.withName(data[2])
+					.withSalary(new BigDecimal(data[3]))
+					.build();
 		} catch (Exception e) {
 			String errorMessage = String.format("Could not convert the data %s", Arrays.asList(data));
 			throw new ConversionException(errorMessage, e);

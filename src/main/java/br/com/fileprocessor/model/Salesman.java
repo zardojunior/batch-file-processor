@@ -10,6 +10,23 @@ public class Salesman implements Model {
 
 	public static final String TYPE = "001";
 
+	public Salesman() {
+		// Empty constructor
+	}
+
+	/**
+	 * Creates a new Salesman instance.
+	 *
+	 * @param cpf the salesman CPF
+	 * @param name the salesman name
+	 * @param salary the salesman salary
+	 */
+	public Salesman(String cpf, String name, BigDecimal salary) {
+		this.cpf = cpf;
+		this.name = name;
+		this.salary = salary;
+	}
+
 	/**
 	 * The salesman CPF.
 	 */
@@ -24,6 +41,12 @@ public class Salesman implements Model {
 	 * The salesman salary.
 	 */
 	private BigDecimal salary;
+
+	private Salesman(Builder builder) {
+		this.cpf = builder.cpf;
+		this.name = builder.name;
+		this.salary = builder.salary;
+	}
 
 	/**
 	 * @return {@link #cpf}
@@ -89,9 +112,48 @@ public class Salesman implements Model {
 		return Objects.equals(cpf, other.cpf);
 	}
 
+	/**
+	 * Creates builder to build {@link Salesman}.
+	 *
+	 * @return created builder
+	 */
+	public static Builder builder() {
+		return new Builder();
+	}
+
+	/**
+	 * Builder to build {@link Salesman}.
+	 */
+	public static final class Builder {
+		private String cpf;
+		private String name;
+		private BigDecimal salary;
+
+		private Builder() {
+		}
+
+		public Builder withCpf(String cpf) {
+			this.cpf = cpf;
+			return this;
+		}
+
+		public Builder withName(String name) {
+			this.name = name;
+			return this;
+		}
+
+		public Builder withSalary(BigDecimal salary) {
+			this.salary = salary;
+			return this;
+		}
+
+		public Salesman build() {
+			return new Salesman(this);
+		}
+	}
+
 	@Override
 	public String toString() {
 		return String.format("Salesman [cpf=%s, name=%s, salary=%s]", cpf, name, salary);
 	}
-
 }

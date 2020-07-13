@@ -16,17 +16,25 @@ public class SaleConverter implements Converter<String[], Model> {
 	@Override
 	public Sale convert(String[] data) {
 		try {
-			Sale sale = new Sale();
-			sale.setSaleId(data[1]);
-			sale.setSaleItems(parseSaleItems(data[2]));
-			sale.setSalesmanName(data[3]);
-			return sale;
+			return Sale.builder()
+					.withSaleId(data[1])
+					.withSaleItems(parseSaleItems(data[2]))
+					.withSalesmanName(data[3])
+					.build();
 		} catch (Exception e) {
 			String errorMessage = String.format("Could not convert the data %s", Arrays.asList(data));
 			throw new ConversionException(errorMessage, e);
 		}
 	}
 
+	/**
+	 * Parse a string with format
+	 * <pre>003ÁSale IDÁ[Item ID-Item Quantity-Item Price]ÁSalesman name</pre>
+	 * and convert into a SaleItem instance.
+	 *
+	 * <p>Example:
+	 * <pre>003Á10Á[1-10-100,2-30-2.50,3-40-3.10]ÁPedro</pre>
+	 */
 	private List<SaleItem> parseSaleItems(String text) {
 		if (text == null || text.isEmpty() || !text.startsWith("[") || !text.endsWith("]")) {
 			return Collections.emptyList();
@@ -39,10 +47,11 @@ public class SaleConverter implements Converter<String[], Model> {
 		List<SaleItem> saleItems = new ArrayList<>(splitted.length);
 		for (String string : splitted) {
 			String[] values = string.split("-");
-			SaleItem saleItem = new SaleItem();
-			saleItem.setItemId(Integer.parseInt(values[0]));
-			saleItem.setItemQuantity(Integer.parseInt(values[1]));
-			saleItem.setItemPrice(new BigDecimal(values[2]));
+			SaleItem saleItem = SaleItem.builder()
+					.withItemId(Integer.parseInt(values[0]))
+					.withItemQuantity(Integer.parseInt(values[1]))
+					.withItemPrice(new BigDecimal(values[2]))
+					.build();
 			saleItems.add(saleItem);
 		}
 		return saleItems;

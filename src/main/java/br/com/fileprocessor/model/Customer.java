@@ -9,6 +9,23 @@ public class Customer implements Model {
 
 	public static final String TYPE = "002";
 
+	public Customer() {
+		// Empty constructor
+	}
+
+	/**
+	 * Creates a new Customer instance.
+	 *
+	 * @param cnpj the customer CNPJ
+	 * @param name the customer name
+	 * @param businessArea the customer business area
+	 */
+	public Customer(String cnpj, String name, String businessArea) {
+		this.cnpj = cnpj;
+		this.name = name;
+		this.businessArea = businessArea;
+	}
+
 	/**
 	 * The customer CNPJ.
 	 */
@@ -23,6 +40,12 @@ public class Customer implements Model {
 	 * The customer business area.
 	 */
 	private String businessArea;
+
+	private Customer(Builder builder) {
+		this.cnpj = builder.cnpj;
+		this.name = builder.name;
+		this.businessArea = builder.businessArea;
+	}
 
 	/**
 	 * @return {@link #cnpj}
@@ -88,9 +111,47 @@ public class Customer implements Model {
 		return Objects.equals(cnpj, other.cnpj);
 	}
 
+	/**
+	 * Creates builder to build {@link Customer}.
+	 * @return created builder
+	 */
+	public static Builder builder() {
+		return new Builder();
+	}
+
+	/**
+	 * Builder to build {@link Customer}.
+	 */
+	public static final class Builder {
+		private String cnpj;
+		private String name;
+		private String businessArea;
+
+		private Builder() {
+		}
+
+		public Builder withCnpj(String cnpj) {
+			this.cnpj = cnpj;
+			return this;
+		}
+
+		public Builder withName(String name) {
+			this.name = name;
+			return this;
+		}
+
+		public Builder withBusinessArea(String businessArea) {
+			this.businessArea = businessArea;
+			return this;
+		}
+
+		public Customer build() {
+			return new Customer(this);
+		}
+	}
+
 	@Override
 	public String toString() {
 		return String.format("Customer [cnpj=%s, name=%s, businessArea=%s]", cnpj, name, businessArea);
 	}
-
 }
