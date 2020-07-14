@@ -43,6 +43,7 @@ public class FileProcessor implements Processor<File> {
     public void process(File file) {
 
         try {
+        	log.info("Processing file {} ...", file.getAbsolutePath());
             SalesData salesData = new SalesData(buildModelMap(file));
 
             String numberOfCustomers = String.format("Quantidade de clientes no arquivo de entrada: %s", Reports.getNumberOfCustomers(salesData));
@@ -54,7 +55,7 @@ public class FileProcessor implements Processor<File> {
             Path path = Paths.get(outputDir, outputFileName);
             FileUtilities.writeLinesToFile(path.toFile(), numberOfCustomers, numberOfSalesmen, mostExpensiveSaleId, worstSalesmanName);
 
-            log.info("File processed: {}", file.getName());
+            log.info("Report created: {}", path.toFile().getAbsolutePath());
 
         } catch (Exception e) {
             String errorMessage = String.format("Could not process the file %s", file.getAbsolutePath());
