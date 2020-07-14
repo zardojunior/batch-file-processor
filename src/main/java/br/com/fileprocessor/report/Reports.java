@@ -73,7 +73,7 @@ public class Reports {
         }
 
         // Sorting per value (ascending)
-        Optional<Map.Entry<String,BigDecimal>> sortedTotals =	totalPerSalesmanName.entrySet().stream()
+        Optional<Map.Entry<String,BigDecimal>> sortedTotals = totalPerSalesmanName.entrySet().stream()
                 .sorted(Map.Entry.comparingByValue()).findFirst();
 
         if (sortedTotals.isPresent()) {
