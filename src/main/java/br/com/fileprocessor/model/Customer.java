@@ -41,6 +41,11 @@ public class Customer implements Model {
         this.businessArea = businessArea;
     }
 
+    /**
+     * Private constructor for {@link Builder} purposes.
+     *
+     * @param builder the Customer {@link Builder}
+     */
     private Customer(Builder builder) {
         this.cnpj = builder.cnpj;
         this.name = builder.name;
@@ -49,6 +54,7 @@ public class Customer implements Model {
 
     /**
      * Creates builder to build {@link Customer}.
+     *
      * @return created builder
      */
     public static Builder builder() {

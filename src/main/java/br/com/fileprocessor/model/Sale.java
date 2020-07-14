@@ -44,6 +44,11 @@ public class Sale implements Model {
         this.salesmanName = salesmanName;
     }
 
+    /**
+     * Private constructor for {@link Builder} purposes.
+     *
+     * @param builder the Sale {@link Builder}
+     */
     private Sale(Builder builder) {
         this.saleId = builder.saleId;
         this.saleItems = builder.saleItems;

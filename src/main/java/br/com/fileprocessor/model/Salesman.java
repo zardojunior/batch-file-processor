@@ -28,20 +28,10 @@ public class Salesman implements Model {
     }
 
     /**
-     * The salesman CPF.
+     * Private constructor for {@link Builder} purposes.
+     *
+     * @param builder the Salesman {@link Builder}
      */
-    private String cpf;
-
-    /**
-     * The salesman name.
-     */
-    private String name;
-
-    /**
-     * The salesman salary.
-     */
-    private BigDecimal salary;
-
     private Salesman(Builder builder) {
         this.cpf = builder.cpf;
         this.name = builder.name;
@@ -87,6 +77,21 @@ public class Salesman implements Model {
             return new Salesman(this);
         }
     }
+
+    /**
+     * The salesman CPF.
+     */
+    private String cpf;
+
+    /**
+     * The salesman name.
+     */
+    private String name;
+
+    /**
+     * The salesman salary.
+     */
+    private BigDecimal salary;
 
     /**
      * @return {@link #cpf}

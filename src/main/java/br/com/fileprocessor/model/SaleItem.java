@@ -40,6 +40,11 @@ public class SaleItem {
         this.itemPrice = itemPrice;
     }
 
+    /**
+     * Private constructor for {@link Builder} purposes.
+     *
+     * @param builder the SaleItem {@link Builder}
+     */
     private SaleItem(Builder builder) {
         this.itemId = builder.itemId;
         this.itemQuantity = builder.itemQuantity;
@@ -48,6 +53,7 @@ public class SaleItem {
 
     /**
      * Creates builder to build {@link SaleItem}.
+     *
      * @return created builder
      */
     public static Builder builder() {
