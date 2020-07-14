@@ -28,14 +28,14 @@ public class FileProcessorApplication {
 
         String inputDir = getPathRelativeToUserDirectory(configuration.getInputDir());
         String outputDir = getPathRelativeToUserDirectory(configuration.getOutputDir());
-        String outpurFileExtension = configuration.getOutputFileExtension();
+        String outputFileExtension = configuration.getOutputFileExtension();
         long poolingInterval = Duration.ofSeconds(configuration.getPoolingIntervalInSeconds()).toMillis();
         FileFilter fileFilter = new SuffixFileFilter(configuration.getInputFileExtension());
 
         FileUtilities.createDirectories(inputDir);
         FileUtilities.createDirectories(outputDir);
 
-        Processor<File> fileProcessor = new FileProcessor(outputDir, outpurFileExtension);
+        Processor<File> fileProcessor = new FileProcessor(outputDir, outputFileExtension);
         FileAlterationMonitor monitor = new FileAlterationMonitor(poolingInterval);
         FileAlterationObserver observer = new FileAlterationObserver(inputDir, fileFilter);
         FileAlterationListener listener = new FileListener(fileProcessor);
