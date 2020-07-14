@@ -42,7 +42,7 @@ public class Reports {
      * @return the number of distinct salesmen
      */
     public static final Integer getNumberOfSalesmen(SalesData data) {
-        return data.getModelsOfType(Customer.TYPE).size();
+        return data.getModelsOfType(Salesman.TYPE).size();
     }
 
     /**
