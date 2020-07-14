@@ -9,18 +9,18 @@ import br.com.fileprocessor.model.Salesman;
 
 public class SalesmanConverter implements Converter<String[], Model> {
 
-	@Override
-	public Salesman convert(String[] data) {
-		try {
-			return Salesman.builder()
-					.withCpf(data[1])
-					.withName(data[2])
-					.withSalary(new BigDecimal(data[3]))
-					.build();
-		} catch (Exception e) {
-			String errorMessage = String.format("Could not convert the data %s", Arrays.asList(data));
-			throw new ConversionException(errorMessage, e);
-		}
-	}
+    @Override
+    public Salesman convert(String[] data) {
+        try {
+            return Salesman.builder()
+                    .withCpf(data[1])
+                    .withName(data[2])
+                    .withSalary(new BigDecimal(data[3]))
+                    .build();
+        } catch (Exception e) {
+            String errorMessage = String.format("Could not convert the data %s", Arrays.asList(data));
+            throw new ConversionException(errorMessage, e);
+        }
+    }
 
 }

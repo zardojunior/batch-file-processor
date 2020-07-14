@@ -8,152 +8,152 @@ import java.util.Objects;
  */
 public class Salesman implements Model {
 
-	public static final String TYPE = "001";
+    public static final String TYPE = "001";
 
-	public Salesman() {
-		// Empty constructor
-	}
+    public Salesman() {
+        // Empty constructor
+    }
 
-	/**
-	 * Creates a new Salesman instance.
-	 *
-	 * @param cpf the salesman CPF
-	 * @param name the salesman name
-	 * @param salary the salesman salary
-	 */
-	public Salesman(String cpf, String name, BigDecimal salary) {
-		this.cpf = cpf;
-		this.name = name;
-		this.salary = salary;
-	}
+    /**
+     * Creates a new Salesman instance.
+     *
+     * @param cpf the salesman CPF
+     * @param name the salesman name
+     * @param salary the salesman salary
+     */
+    public Salesman(String cpf, String name, BigDecimal salary) {
+        this.cpf = cpf;
+        this.name = name;
+        this.salary = salary;
+    }
 
-	/**
-	 * The salesman CPF.
-	 */
-	private String cpf;
+    /**
+     * The salesman CPF.
+     */
+    private String cpf;
 
-	/**
-	 * The salesman name.
-	 */
-	private String name;
+    /**
+     * The salesman name.
+     */
+    private String name;
 
-	/**
-	 * The salesman salary.
-	 */
-	private BigDecimal salary;
+    /**
+     * The salesman salary.
+     */
+    private BigDecimal salary;
 
-	private Salesman(Builder builder) {
-		this.cpf = builder.cpf;
-		this.name = builder.name;
-		this.salary = builder.salary;
-	}
+    private Salesman(Builder builder) {
+        this.cpf = builder.cpf;
+        this.name = builder.name;
+        this.salary = builder.salary;
+    }
 
-	/**
-	 * @return {@link #cpf}
-	 */
-	public String getCpf() {
-		return cpf;
-	}
+    /**
+     * Creates builder to build {@link Salesman}.
+     *
+     * @return created builder
+     */
+    public static Builder builder() {
+        return new Builder();
+    }
 
-	/**
-	 * @param cpf {@link #cpf}
-	 */
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
+    /**
+     * Builder to build {@link Salesman}.
+     */
+    public static final class Builder {
+        private String cpf;
+        private String name;
+        private BigDecimal salary;
 
-	/**
-	 * @return {@link #name}
-	 */
-	public String getName() {
-		return name;
-	}
+        private Builder() {
+        }
 
-	/**
-	 * @param name {@link #name}
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
+        public Builder withCpf(String cpf) {
+            this.cpf = cpf;
+            return this;
+        }
 
-	/**
-	 * @return {@link #salary}
-	 */
-	public BigDecimal getSalary() {
-		return salary;
-	}
+        public Builder withName(String name) {
+            this.name = name;
+            return this;
+        }
 
-	/**
-	 * @param salary {@link #salary}
-	 */
-	public void setSalary(BigDecimal salary) {
-		this.salary = salary;
-	}
+        public Builder withSalary(BigDecimal salary) {
+            this.salary = salary;
+            return this;
+        }
 
-	@Override
-	public String getType() {
-		return TYPE;
-	}
+        public Salesman build() {
+            return new Salesman(this);
+        }
+    }
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(cpf);
-	}
+    /**
+     * @return {@link #cpf}
+     */
+    public String getCpf() {
+        return cpf;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Salesman other = (Salesman) obj;
-		return Objects.equals(cpf, other.cpf);
-	}
+    /**
+     * @param cpf {@link #cpf}
+     */
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
 
-	/**
-	 * Creates builder to build {@link Salesman}.
-	 *
-	 * @return created builder
-	 */
-	public static Builder builder() {
-		return new Builder();
-	}
+    /**
+     * @return {@link #name}
+     */
+    public String getName() {
+        return name;
+    }
 
-	/**
-	 * Builder to build {@link Salesman}.
-	 */
-	public static final class Builder {
-		private String cpf;
-		private String name;
-		private BigDecimal salary;
+    /**
+     * @param name {@link #name}
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 
-		private Builder() {
-		}
+    /**
+     * @return {@link #salary}
+     */
+    public BigDecimal getSalary() {
+        return salary;
+    }
 
-		public Builder withCpf(String cpf) {
-			this.cpf = cpf;
-			return this;
-		}
+    /**
+     * @param salary {@link #salary}
+     */
+    public void setSalary(BigDecimal salary) {
+        this.salary = salary;
+    }
 
-		public Builder withName(String name) {
-			this.name = name;
-			return this;
-		}
+    @Override
+    public String getType() {
+        return TYPE;
+    }
 
-		public Builder withSalary(BigDecimal salary) {
-			this.salary = salary;
-			return this;
-		}
+    @Override
+    public int hashCode() {
+        return Objects.hash(cpf);
+    }
 
-		public Salesman build() {
-			return new Salesman(this);
-		}
-	}
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Salesman other = (Salesman) obj;
+        return Objects.equals(cpf, other.cpf);
+    }
 
-	@Override
-	public String toString() {
-		return String.format("Salesman [cpf=%s, name=%s, salary=%s]", cpf, name, salary);
-	}
+    @Override
+    public String toString() {
+        return String.format("Salesman [cpf=%s, name=%s, salary=%s]", cpf, name, salary);
+    }
 }

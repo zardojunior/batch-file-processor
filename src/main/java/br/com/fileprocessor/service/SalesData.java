@@ -10,14 +10,14 @@ import br.com.fileprocessor.model.Model;
  */
 public class SalesData {
 
-	private Map<String, Set<Model>> map;
+    private Map<String, Set<Model>> map;
 
-	public SalesData(Map<String, Set<Model>> map) {
-		this.map = map;
-	}
+    public SalesData(Map<String, Set<Model>> map) {
+        this.map = map;
+    }
 
-	public Set<Model> getModelsOfType(String type) {
-		return this.map.get(type);
-	}
+    public Set<Model> getModelsOfType(String type) {
+        return this.map.get(type);
+    }
 
 }

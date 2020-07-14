@@ -24,31 +24,31 @@ import br.com.fileprocessor.util.FileUtilities;
  */
 public class FileProcessorApplication {
 
-	public void run(Configuration configuration) throws Exception {
+    public void run(Configuration configuration) throws Exception {
 
-		String inputDir = getPathRelativeToUserDirectory(configuration.getInputDir());
-		String outputDir = getPathRelativeToUserDirectory(configuration.getOutputDir());
-		String outpurFileExtension = configuration.getOutputFileExtension();
-		long poolingInterval = Duration.ofSeconds(configuration.getPoolingIntervalInSeconds()).toMillis();
-		FileFilter fileFilter = new SuffixFileFilter(configuration.getInputFileExtension());
+        String inputDir = getPathRelativeToUserDirectory(configuration.getInputDir());
+        String outputDir = getPathRelativeToUserDirectory(configuration.getOutputDir());
+        String outpurFileExtension = configuration.getOutputFileExtension();
+        long poolingInterval = Duration.ofSeconds(configuration.getPoolingIntervalInSeconds()).toMillis();
+        FileFilter fileFilter = new SuffixFileFilter(configuration.getInputFileExtension());
 
-		FileUtilities.createDirectories(inputDir);
-		FileUtilities.createDirectories(outputDir);
+        FileUtilities.createDirectories(inputDir);
+        FileUtilities.createDirectories(outputDir);
 
-		Processor<File> fileProcessor = new FileProcessor(outputDir, outpurFileExtension);
-		FileAlterationMonitor monitor = new FileAlterationMonitor(poolingInterval);
-		FileAlterationObserver observer = new FileAlterationObserver(inputDir, fileFilter);
-		FileAlterationListener listener = new FileListener(fileProcessor);
+        Processor<File> fileProcessor = new FileProcessor(outputDir, outpurFileExtension);
+        FileAlterationMonitor monitor = new FileAlterationMonitor(poolingInterval);
+        FileAlterationObserver observer = new FileAlterationObserver(inputDir, fileFilter);
+        FileAlterationListener listener = new FileListener(fileProcessor);
 
-		observer.addListener(listener);
-		monitor.addObserver(observer);
+        observer.addListener(listener);
+        monitor.addObserver(observer);
 
-		new FileMonitorService(monitor).start();
-	}
+        new FileMonitorService(monitor).start();
+    }
 
-	public static void main(String[] args) throws Exception {
-		Configuration configuration = ConfigurationLoader.loadConfiguration(args, Configuration.class);
-		new FileProcessorApplication().run(configuration);
-	}
+    public static void main(String[] args) throws Exception {
+        Configuration configuration = ConfigurationLoader.loadConfiguration(args, Configuration.class);
+        new FileProcessorApplication().run(configuration);
+    }
 
 }

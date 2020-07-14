@@ -10,163 +10,163 @@ import java.util.Objects;
  */
 public class Sale implements Model {
 
-	public static final String TYPE = "003";
+    public static final String TYPE = "003";
 
-	public Sale() {
-		// Empty constructor
-	}
+    /**
+     * The identifier of the sale.
+     */
+    private String saleId;
 
-	/**
-	 * Creates a new Sale instance.
-	 *
-	 * @param saleId the identifier of the sale
-	 * @param saleItems the purchased items
-	 * @param salesmanName the salesman name
-	 */
-	public Sale(String saleId, List<SaleItem> saleItems, String salesmanName) {
-		this.saleId = saleId;
-		this.saleItems = saleItems;
-		this.salesmanName = salesmanName;
-	}
+    /**
+     * The purchased items.
+     */
+    private List<SaleItem> saleItems;
 
-	/**
-	 * The identifier of the sale.
-	 */
-	private String saleId;
+    /**
+     * The salesman name.
+     */
+    private String salesmanName;
 
-	/**
-	 * The purchased items.
-	 */
-	private List<SaleItem> saleItems;
+    public Sale() {
+        // Empty constructor
+    }
 
-	/**
-	 * The salesman name.
-	 */
-	private String salesmanName;
+    /**
+     * Creates a new Sale instance.
+     *
+     * @param saleId the identifier of the sale
+     * @param saleItems the purchased items
+     * @param salesmanName the salesman name
+     */
+    public Sale(String saleId, List<SaleItem> saleItems, String salesmanName) {
+        this.saleId = saleId;
+        this.saleItems = saleItems;
+        this.salesmanName = salesmanName;
+    }
 
-	private Sale(Builder builder) {
-		this.saleId = builder.saleId;
-		this.saleItems = builder.saleItems;
-		this.salesmanName = builder.salesmanName;
-	}
+    private Sale(Builder builder) {
+        this.saleId = builder.saleId;
+        this.saleItems = builder.saleItems;
+        this.salesmanName = builder.salesmanName;
+    }
 
-	/**
-	 * @return {@link #saleId}
-	 */
-	public String getSaleId() {
-		return saleId;
-	}
+    /**
+     * Creates builder to build {@link Sale}.
+     *
+     * @return created builder
+     */
+    public static Builder builder() {
+        return new Builder();
+    }
 
-	/**
-	 * @param saleId {@link #saleId}
-	 */
-	public void setSaleId(String saleId) {
-		this.saleId = saleId;
-	}
+    /**
+     * Builder to build {@link Sale}.
+     */
+    public static final class Builder {
+        private String saleId;
+        private List<SaleItem> saleItems = Collections.emptyList();
+        private String salesmanName;
 
-	/**
-	 * @return {@link #saleItems}
-	 */
-	public List<SaleItem> getSaleItems() {
-		return saleItems;
-	}
+        private Builder() {
+        }
 
-	/**
-	 * @param saleItems {@link #saleItems}
-	 */
-	public void setSaleItems(List<SaleItem> saleItems) {
-		this.saleItems = saleItems;
-	}
+        public Builder withSaleId(String saleId) {
+            this.saleId = saleId;
+            return this;
+        }
 
-	/**
-	 * @return {@link #salesmanName}
-	 */
-	public String getSalesmanName() {
-		return salesmanName;
-	}
+        public Builder withSaleItems(List<SaleItem> saleItems) {
+            this.saleItems = saleItems;
+            return this;
+        }
 
-	/**
-	 * @param salesmanName {@link #salesmanName}
-	 */
-	public void setSalesmanName(String salesmanName) {
-		this.salesmanName = salesmanName;
-	}
+        public Builder withSalesmanName(String salesmanName) {
+            this.salesmanName = salesmanName;
+            return this;
+        }
 
-	/**
-	 * Get the total price of the purchase.
-	 *
-	 * @return the total price of the purchase
-	 */
-	public BigDecimal getTotalPrice() {
-		return saleItems.stream()
-				.map(SaleItem::getTotalPrice)
-				.reduce(BigDecimal.ZERO, BigDecimal::add);
-	}
+        public Sale build() {
+            return new Sale(this);
+        }
+    }
 
-	@Override
-	public String getType() {
-		return TYPE;
-	}
+    /**
+     * @return {@link #saleId}
+     */
+    public String getSaleId() {
+        return saleId;
+    }
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(saleId);
-	}
+    /**
+     * @param saleId {@link #saleId}
+     */
+    public void setSaleId(String saleId) {
+        this.saleId = saleId;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Sale other = (Sale) obj;
-		return Objects.equals(saleId, other.saleId);
-	}
+    /**
+     * @return {@link #saleItems}
+     */
+    public List<SaleItem> getSaleItems() {
+        return saleItems;
+    }
 
-	/**
-	 * Creates builder to build {@link Sale}.
-	 *
-	 * @return created builder
-	 */
-	public static Builder builder() {
-		return new Builder();
-	}
+    /**
+     * @param saleItems {@link #saleItems}
+     */
+    public void setSaleItems(List<SaleItem> saleItems) {
+        this.saleItems = saleItems;
+    }
 
-	/**
-	 * Builder to build {@link Sale}.
-	 */
-	public static final class Builder {
-		private String saleId;
-		private List<SaleItem> saleItems = Collections.emptyList();
-		private String salesmanName;
+    /**
+     * @return {@link #salesmanName}
+     */
+    public String getSalesmanName() {
+        return salesmanName;
+    }
 
-		private Builder() {
-		}
+    /**
+     * @param salesmanName {@link #salesmanName}
+     */
+    public void setSalesmanName(String salesmanName) {
+        this.salesmanName = salesmanName;
+    }
 
-		public Builder withSaleId(String saleId) {
-			this.saleId = saleId;
-			return this;
-		}
+    /**
+     * Get the total price of the purchase.
+     *
+     * @return the total price of the purchase
+     */
+    public BigDecimal getTotalPrice() {
+        return saleItems.stream()
+                .map(SaleItem::getTotalPrice)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
 
-		public Builder withSaleItems(List<SaleItem> saleItems) {
-			this.saleItems = saleItems;
-			return this;
-		}
+    @Override
+    public String getType() {
+        return TYPE;
+    }
 
-		public Builder withSalesmanName(String salesmanName) {
-			this.salesmanName = salesmanName;
-			return this;
-		}
+    @Override
+    public int hashCode() {
+        return Objects.hash(saleId);
+    }
 
-		public Sale build() {
-			return new Sale(this);
-		}
-	}
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Sale other = (Sale) obj;
+        return Objects.equals(saleId, other.saleId);
+    }
 
-	@Override
-	public String toString() {
-		return String.format("Sale [saleId=%s, saleItems=%s, salesmanName=%s]", saleId, saleItems, salesmanName);
-	}
+    @Override
+    public String toString() {
+        return String.format("Sale [saleId=%s, saleItems=%s, salesmanName=%s]", saleId, saleItems, salesmanName);
+    }
 }

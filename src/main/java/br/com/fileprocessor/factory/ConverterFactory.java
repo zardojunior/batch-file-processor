@@ -11,20 +11,20 @@ import br.com.fileprocessor.model.Salesman;
 
 public class ConverterFactory {
 
-	public static final String SALE_TYPE = Sale.TYPE;
-	public static final String CUSTOMER_TYPE = Customer.TYPE;
-	public static final String SALESMAN_TYPE = Salesman.TYPE;
+    public static final String SALE_TYPE = Sale.TYPE;
+    public static final String CUSTOMER_TYPE = Customer.TYPE;
+    public static final String SALESMAN_TYPE = Salesman.TYPE;
 
-	public static Converter<String[], Model> create(String type) {
-		switch (type) {
-		case SALE_TYPE:
-			return new SaleConverter();
-		case CUSTOMER_TYPE:
-			return new CustomerConverter();
-		case SALESMAN_TYPE:
-			return new SalesmanConverter();
-		default:
-			return null;
-		}
-	}
+    public static Converter<String[], Model> create(String type) {
+        switch (type) {
+        case SALE_TYPE:
+            return new SaleConverter();
+        case CUSTOMER_TYPE:
+            return new CustomerConverter();
+        case SALESMAN_TYPE:
+            return new SalesmanConverter();
+        default:
+            return null;
+        }
+    }
 }

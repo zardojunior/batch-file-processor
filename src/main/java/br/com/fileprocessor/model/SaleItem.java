@@ -8,156 +8,156 @@ import java.util.Objects;
  */
 public class SaleItem {
 
-	public SaleItem() {
-		// Empty constructor
-	}
+    /**
+     * The purchased item identifier.
+     */
+    private Integer itemId;
 
-	/**
-	 * Creates a new SaleItem instance.
-	 *
-	 * @param itemId the purchased item identifier
-	 * @param itemQuantity the purchased item quantity
-	 * @param itemPrice The item unit price
-	 */
-	public SaleItem(Integer itemId, Integer itemQuantity, BigDecimal itemPrice) {
-		this.itemId = itemId;
-		this.itemQuantity = itemQuantity;
-		this.itemPrice = itemPrice;
-	}
+    /**
+     * The purchased item quantity.
+     */
+    private Integer itemQuantity;
 
-	/**
-	 * The purchased item identifier.
-	 */
-	private Integer itemId;
+    /**
+     * The item unit price.
+     */
+    private BigDecimal itemPrice;
 
-	/**
-	 * The purchased item quantity.
-	 */
-	private Integer itemQuantity;
+    public SaleItem() {
+        // Empty constructor
+    }
 
-	/**
-	 * The item unit price.
-	 */
-	private BigDecimal itemPrice;
+    /**
+     * Creates a new SaleItem instance.
+     *
+     * @param itemId the purchased item identifier
+     * @param itemQuantity the purchased item quantity
+     * @param itemPrice The item unit price
+     */
+    public SaleItem(Integer itemId, Integer itemQuantity, BigDecimal itemPrice) {
+        this.itemId = itemId;
+        this.itemQuantity = itemQuantity;
+        this.itemPrice = itemPrice;
+    }
 
-	private SaleItem(Builder builder) {
-		this.itemId = builder.itemId;
-		this.itemQuantity = builder.itemQuantity;
-		this.itemPrice = builder.itemPrice;
-	}
+    private SaleItem(Builder builder) {
+        this.itemId = builder.itemId;
+        this.itemQuantity = builder.itemQuantity;
+        this.itemPrice = builder.itemPrice;
+    }
 
-	/**
-	 * @return {@link #itemId}
-	 */
-	public Integer getItemId() {
-		return itemId;
-	}
+    /**
+     * Creates builder to build {@link SaleItem}.
+     * @return created builder
+     */
+    public static Builder builder() {
+        return new Builder();
+    }
 
-	/**
-	 * @param itemId {@link #itemId}
-	 */
-	public void setItemId(Integer itemId) {
-		this.itemId = itemId;
-	}
+    /**
+     * Builder to build {@link SaleItem}.
+     */
+    public static final class Builder {
+        private Integer itemId;
+        private Integer itemQuantity;
+        private BigDecimal itemPrice;
 
-	/**
-	 * @return {@link #itemQuantity}
-	 */
-	public Integer getItemQuantity() {
-		return itemQuantity;
-	}
+        private Builder() {
+        }
 
-	/**
-	 * @param itemQuantity {@link #itemQuantity}
-	 */
-	public void setItemQuantity(Integer itemQuantity) {
-		this.itemQuantity = itemQuantity;
-	}
+        public Builder withItemId(Integer itemId) {
+            this.itemId = itemId;
+            return this;
+        }
 
-	/**
-	 * @return {@link #itemPrice}
-	 */
-	public BigDecimal getItemPrice() {
-		return itemPrice;
-	}
+        public Builder withItemQuantity(Integer itemQuantity) {
+            this.itemQuantity = itemQuantity;
+            return this;
+        }
 
-	/**
-	 * @param itemPrice {@link #itemPrice}
-	 */
-	public void setItemPrice(BigDecimal itemPrice) {
-		this.itemPrice = itemPrice;
-	}
+        public Builder withItemPrice(BigDecimal itemPrice) {
+            this.itemPrice = itemPrice;
+            return this;
+        }
 
-	/**
-	 * Get the total price of the sale item (unit price * quantity).
-	 *
-	 * @return the total price of the sale item
-	 */
-	public BigDecimal getTotalPrice() {
-		return itemPrice.multiply(BigDecimal.valueOf(itemQuantity));
-	}
+        public SaleItem build() {
+            return new SaleItem(this);
+        }
+    }
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(itemId, itemPrice, itemQuantity);
-	}
+    /**
+     * @return {@link #itemId}
+     */
+    public Integer getItemId() {
+        return itemId;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		SaleItem other = (SaleItem) obj;
-		return Objects.equals(itemId, other.itemId)
-				&& Objects.equals(itemPrice, other.itemPrice)
-				&& Objects.equals(itemQuantity, other.itemQuantity);
-	}
+    /**
+     * @param itemId {@link #itemId}
+     */
+    public void setItemId(Integer itemId) {
+        this.itemId = itemId;
+    }
 
-	/**
-	 * Creates builder to build {@link SaleItem}.
-	 *
-	 * @return created builder
-	 */
-	public static Builder builder() {
-		return new Builder();
-	}
+    /**
+     * @return {@link #itemQuantity}
+     */
+    public Integer getItemQuantity() {
+        return itemQuantity;
+    }
 
-	/**
-	 * Builder to build {@link SaleItem}.
-	 */
-	public static final class Builder {
-		private Integer itemId;
-		private Integer itemQuantity;
-		private BigDecimal itemPrice;
+    /**
+     * @param itemQuantity {@link #itemQuantity}
+     */
+    public void setItemQuantity(Integer itemQuantity) {
+        this.itemQuantity = itemQuantity;
+    }
 
-		private Builder() {
-		}
+    /**
+     * @return {@link #itemPrice}
+     */
+    public BigDecimal getItemPrice() {
+        return itemPrice;
+    }
 
-		public Builder withItemId(Integer itemId) {
-			this.itemId = itemId;
-			return this;
-		}
+    /**
+     * @param itemPrice {@link #itemPrice}
+     */
+    public void setItemPrice(BigDecimal itemPrice) {
+        this.itemPrice = itemPrice;
+    }
 
-		public Builder withItemQuantity(Integer itemQuantity) {
-			this.itemQuantity = itemQuantity;
-			return this;
-		}
+    /**
+     * Get the total price of the sale item (unit price * quantity).
+     *
+     * @return the total price of the sale item
+     */
+    public BigDecimal getTotalPrice() {
+        return itemPrice.multiply(BigDecimal.valueOf(itemQuantity));
+    }
 
-		public Builder withItemPrice(BigDecimal itemPrice) {
-			this.itemPrice = itemPrice;
-			return this;
-		}
+    @Override
+    public int hashCode() {
+        return Objects.hash(itemId, itemPrice, itemQuantity);
+    }
 
-		public SaleItem build() {
-			return new SaleItem(this);
-		}
-	}
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        SaleItem other = (SaleItem) obj;
+        return Objects.equals(itemId, other.itemId)
+                && Objects.equals(itemPrice, other.itemPrice)
+                && Objects.equals(itemQuantity, other.itemQuantity);
+    }
 
-	@Override
-	public String toString() {
-		return String.format("SaleItem [itemId=%s, itemQuantity=%s, itemPrice=%s]", itemId, itemQuantity, itemPrice);
-	}
+    @Override
+    public String toString() {
+        return String.format("SaleItem [itemId=%s, itemQuantity=%s, itemPrice=%s]", itemId, itemQuantity, itemPrice);
+    }
+
 }

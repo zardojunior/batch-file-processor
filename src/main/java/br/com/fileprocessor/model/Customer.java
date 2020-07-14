@@ -7,151 +7,151 @@ import java.util.Objects;
  */
 public class Customer implements Model {
 
-	public static final String TYPE = "002";
+    public static final String TYPE = "002";
 
-	public Customer() {
-		// Empty constructor
-	}
+    /**
+     * The customer CNPJ.
+     */
+    private String cnpj;
 
-	/**
-	 * Creates a new Customer instance.
-	 *
-	 * @param cnpj the customer CNPJ
-	 * @param name the customer name
-	 * @param businessArea the customer business area
-	 */
-	public Customer(String cnpj, String name, String businessArea) {
-		this.cnpj = cnpj;
-		this.name = name;
-		this.businessArea = businessArea;
-	}
+    /**
+     * The customer name.
+     */
+    private String name;
 
-	/**
-	 * The customer CNPJ.
-	 */
-	private String cnpj;
+    /**
+     * The customer business area.
+     */
+    private String businessArea;
 
-	/**
-	 * The customer name.
-	 */
-	private String name;
+    public Customer() {
+        // Empty constructor
+    }
 
-	/**
-	 * The customer business area.
-	 */
-	private String businessArea;
+    /**
+     * Creates a new Customer instance.
+     *
+     * @param cnpj the customer CNPJ
+     * @param name the customer name
+     * @param businessArea the customer business area
+     */
+    public Customer(String cnpj, String name, String businessArea) {
+        this.cnpj = cnpj;
+        this.name = name;
+        this.businessArea = businessArea;
+    }
 
-	private Customer(Builder builder) {
-		this.cnpj = builder.cnpj;
-		this.name = builder.name;
-		this.businessArea = builder.businessArea;
-	}
+    private Customer(Builder builder) {
+        this.cnpj = builder.cnpj;
+        this.name = builder.name;
+        this.businessArea = builder.businessArea;
+    }
 
-	/**
-	 * @return {@link #cnpj}
-	 */
-	public String getCnpj() {
-		return cnpj;
-	}
+    /**
+     * Creates builder to build {@link Customer}.
+     * @return created builder
+     */
+    public static Builder builder() {
+        return new Builder();
+    }
 
-	/**
-	 * @param cnpj {@link #cnpj}
-	 */
-	public void setCnpj(String cnpj) {
-		this.cnpj = cnpj;
-	}
+    /**
+     * Builder to build {@link Customer}.
+     */
+    public static final class Builder {
+        private String cnpj;
+        private String name;
+        private String businessArea;
 
-	/**
-	 * @return {@link #name}
-	 */
-	public String getName() {
-		return name;
-	}
+        private Builder() {
+        }
 
-	/**
-	 * @param name {@link #name}
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
+        public Builder withCnpj(String cnpj) {
+            this.cnpj = cnpj;
+            return this;
+        }
 
-	/**
-	 * @return {@link #businessArea}
-	 */
-	public String getBusinessArea() {
-		return businessArea;
-	}
+        public Builder withName(String name) {
+            this.name = name;
+            return this;
+        }
 
-	/**
-	 * @param businessArea {@link #businessArea}
-	 */
-	public void setBusinessArea(String businessArea) {
-		this.businessArea = businessArea;
-	}
+        public Builder withBusinessArea(String businessArea) {
+            this.businessArea = businessArea;
+            return this;
+        }
 
-	@Override
-	public String getType() {
-		return TYPE;
-	}
+        public Customer build() {
+            return new Customer(this);
+        }
+    }
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(cnpj);
-	}
+    /**
+     * @return {@link #cnpj}
+     */
+    public String getCnpj() {
+        return cnpj;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Customer other = (Customer) obj;
-		return Objects.equals(cnpj, other.cnpj);
-	}
+    /**
+     * @param cnpj {@link #cnpj}
+     */
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
+    }
 
-	/**
-	 * Creates builder to build {@link Customer}.
-	 * @return created builder
-	 */
-	public static Builder builder() {
-		return new Builder();
-	}
+    /**
+     * @return {@link #name}
+     */
+    public String getName() {
+        return name;
+    }
 
-	/**
-	 * Builder to build {@link Customer}.
-	 */
-	public static final class Builder {
-		private String cnpj;
-		private String name;
-		private String businessArea;
+    /**
+     * @param name {@link #name}
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 
-		private Builder() {
-		}
+    /**
+     * @return {@link #businessArea}
+     */
+    public String getBusinessArea() {
+        return businessArea;
+    }
 
-		public Builder withCnpj(String cnpj) {
-			this.cnpj = cnpj;
-			return this;
-		}
+    /**
+     * @param businessArea {@link #businessArea}
+     */
+    public void setBusinessArea(String businessArea) {
+        this.businessArea = businessArea;
+    }
 
-		public Builder withName(String name) {
-			this.name = name;
-			return this;
-		}
+    @Override
+    public String getType() {
+        return TYPE;
+    }
 
-		public Builder withBusinessArea(String businessArea) {
-			this.businessArea = businessArea;
-			return this;
-		}
+    @Override
+    public int hashCode() {
+        return Objects.hash(cnpj);
+    }
 
-		public Customer build() {
-			return new Customer(this);
-		}
-	}
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Customer other = (Customer) obj;
+        return Objects.equals(cnpj, other.cnpj);
+    }
 
-	@Override
-	public String toString() {
-		return String.format("Customer [cnpj=%s, name=%s, businessArea=%s]", cnpj, name, businessArea);
-	}
+    @Override
+    public String toString() {
+        return String.format("Customer [cnpj=%s, name=%s, businessArea=%s]", cnpj, name, businessArea);
+    }
 }
