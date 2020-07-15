@@ -27,6 +27,11 @@ public class Configuration {
      */
     private Integer poolingIntervalInSeconds;
 
+    /**
+     * Continue to parse the file when a row is not recognized.
+     */
+    private boolean continueOnUnkownRow = true;
+
     public String getInputDir() {
         return inputDir;
     }
@@ -67,11 +72,20 @@ public class Configuration {
         this.poolingIntervalInSeconds = poolingIntervalInSeconds;
     }
 
+    public boolean getContinueOnUnkownRow() {
+        return continueOnUnkownRow;
+    }
+
+    public void setContinueOnUnkownRow(boolean continueOnUnkownRow) {
+        this.continueOnUnkownRow = continueOnUnkownRow;
+    }
+
     @Override
     public String toString() {
         return String.format(
-                "Configuration [inputDir=%s, outputDir=%s, inputFileExtension=%s, outputFileExtension=%s, poolingIntervalInSeconds=%s]",
-                inputDir, outputDir, inputFileExtension, outputFileExtension, poolingIntervalInSeconds);
+                "Configuration [inputDir=%s, outputDir=%s, inputFileExtension=%s, outputFileExtension=%s, poolingIntervalInSeconds=%s, continueOnUnkownRow=%s]",
+                inputDir, outputDir, inputFileExtension, outputFileExtension, poolingIntervalInSeconds,
+                continueOnUnkownRow);
     }
 
 }
