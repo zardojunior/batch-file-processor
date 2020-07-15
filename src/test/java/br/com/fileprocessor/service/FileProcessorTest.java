@@ -1,5 +1,7 @@
 package br.com.fileprocessor.service;
 
+import static br.com.fileprocessor.util.FileUtilities.isFileAccessible;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -22,7 +24,7 @@ public class FileProcessorTest {
 
     @Before
     public void before() throws IOException {
-        this.inputFilenamePath = getFromResources(INPUT_FILENAME).toPath();
+        this.inputFilenamePath = getFileFromResources(INPUT_FILENAME).toPath();
         this.outputFilenamePath = Paths.get(FileUtils.getTempDirectoryPath(), OUTPUT_FILENAME);
         Files.deleteIfExists(outputFilenamePath);
         Assert.assertTrue(isFileAccessible(inputFilenamePath.toFile()));
@@ -42,15 +44,8 @@ public class FileProcessorTest {
         Files.deleteIfExists(outputFilenamePath);
     }
 
-    private File getFromResources(String file) {
+    private File getFileFromResources(String file) {
         return new File(getClass().getClassLoader().getResource(file).getFile());
-    }
-
-    private boolean isFileAccessible(File file) {
-        return file != null
-                && file.exists()
-                && file.isFile()
-                && file.canRead();
     }
 
 }
