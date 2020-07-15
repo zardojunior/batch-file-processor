@@ -14,7 +14,7 @@ public class SaleParser implements Parser<String, String[]> {
      * Regex must match the following example:
      * <pre>003ç10ç[1-10-100,2-30-2.50,3-40-3.10]çPedro</pre>
      */
-    public static final String DEFAULT_REGEX = "("+Sale.TYPE+")"+SEP+"(\\d*)"+SEP+"(.*)"+SEP+"(.*)";
+    public static final String DEFAULT_REGEX = "("+Sale.TYPE+")"+SEP+"(\\d*)"+SEP+"([\\[\\d-,\\.\\]]*)"+SEP+"(.*)";
 
     /**
      * Create a SaleParser with the default REGEX.
