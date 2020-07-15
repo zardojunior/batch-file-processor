@@ -20,7 +20,7 @@ public class ConverterFactoryTest {
 
     @Test(expected = ConverterNotFoundException.class)
     public void testCreateThrowsException() {
-        Assert.assertNull(ConverterFactory.createThrowsException("XXX"));
+        ConverterFactory.createThrowsException("XXX");
     }
 
 }

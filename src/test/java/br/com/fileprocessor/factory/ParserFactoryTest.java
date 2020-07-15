@@ -20,7 +20,7 @@ public class ParserFactoryTest {
 
     @Test(expected = ParserNotFoundException.class)
     public void testCreateThrowsException() {
-        Assert.assertNull(ParserFactory.createThrowsException("XXX"));
+        ParserFactory.createThrowsException("XXX");
     }
 
 }
