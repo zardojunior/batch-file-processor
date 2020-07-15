@@ -34,6 +34,10 @@ public class FileProcessor implements Processor<File> {
     private String outputDir;
     private String outputFileExtension;
 
+    public FileProcessor() {
+        // Empty constructor
+    }
+
     public FileProcessor(String outputDir, String outputFileExtension) {
         this.outputDir = outputDir;
         this.outputFileExtension = outputFileExtension;
@@ -43,8 +47,8 @@ public class FileProcessor implements Processor<File> {
     public void process(File file) {
 
         try {
-        	log.info("Processing file {} ...", file.getAbsolutePath());
-            SalesData salesData = new SalesData(buildModelMap(file));
+            log.info("Processing file {} ...", file.getAbsolutePath());
+            SalesData salesData = buildSalesData(file);
 
             String numberOfCustomers = String.format("Quantidade de clientes no arquivo de entrada: %s", Reports.getNumberOfCustomers(salesData));
             String numberOfSalesmen = String.format("Quantidade de vendedor no arquivo de entrada: %s", Reports.getNumberOfSalesmen(salesData));
@@ -64,14 +68,13 @@ public class FileProcessor implements Processor<File> {
     }
 
     /**
-     * Build a map where the key is the entity type ID and the
-     * value is a collection of models with this type.
+     * Build the sales data.
      *
      * @param file the file to read
-     * @return the map of types and lines of this type
+     * @return the {@link SalesData} representing all models read from file
      * @throws IOException
      */
-    private Map<String, Set<Model>> buildModelMap(File file) throws IOException {
+    public SalesData buildSalesData(File file) throws IOException {
         Map<String, Set<Model>> modelMap = new HashMap<>();
         try (LineIterator iterator = FileUtils.lineIterator(file, StandardCharsets.UTF_8.toString())) {
             while (iterator.hasNext()) {
@@ -89,7 +92,7 @@ public class FileProcessor implements Processor<File> {
                 }
             }
         }
-        return modelMap;
+        return new SalesData(modelMap);
     }
 
     /**
