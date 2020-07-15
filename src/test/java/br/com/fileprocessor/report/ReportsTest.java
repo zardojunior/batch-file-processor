@@ -12,8 +12,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.com.fileprocessor.model.Sale;
+import br.com.fileprocessor.model.SalesData;
 import br.com.fileprocessor.service.FileProcessor;
-import br.com.fileprocessor.service.SalesData;
 
 public class ReportsTest {
 

@@ -22,6 +22,7 @@ import br.com.fileprocessor.exception.ProcessorException;
 import br.com.fileprocessor.factory.ConverterFactory;
 import br.com.fileprocessor.factory.ParserFactory;
 import br.com.fileprocessor.model.Model;
+import br.com.fileprocessor.model.SalesData;
 import br.com.fileprocessor.parser.Parser;
 import br.com.fileprocessor.report.Reports;
 import br.com.fileprocessor.util.FileUtilities;

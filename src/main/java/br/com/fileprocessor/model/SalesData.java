@@ -1,9 +1,7 @@
-package br.com.fileprocessor.service;
+package br.com.fileprocessor.model;
 
 import java.util.Map;
 import java.util.Set;
-
-import br.com.fileprocessor.model.Model;
 
 /**
  * Class that encapsulates all sales data.

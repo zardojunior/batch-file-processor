@@ -16,8 +16,8 @@ import org.apache.commons.collections4.CollectionUtils;
 
 import br.com.fileprocessor.model.Customer;
 import br.com.fileprocessor.model.Sale;
+import br.com.fileprocessor.model.SalesData;
 import br.com.fileprocessor.model.Salesman;
-import br.com.fileprocessor.service.SalesData;
 
 public class Reports {
 
