@@ -49,26 +49,33 @@ public class FileProcessor implements Processor<File> {
 
     @Override
     public void process(File file) {
-
         try {
             log.info("Processing file {} ...", file.getAbsolutePath());
             SalesData salesData = buildSalesData(file);
-
-            String numberOfCustomers = String.format("Quantidade de clientes no arquivo de entrada: %s", Reports.getNumberOfCustomers(salesData));
-            String numberOfSalesmen = String.format("Quantidade de vendedor no arquivo de entrada: %s", Reports.getNumberOfSalesmen(salesData));
-            String mostExpensiveSaleId = String.format("ID da venda mais cara: %s", Reports.getMostExpensiveSale(salesData).getSaleId());
-            String worstSalesmanName = String.format("Pior vendedor: %s", Reports.getWorstSalesman(salesData));
-
             String outputFileName = FilenameUtils.getBaseName(file.getName()).concat(outputFileExtension);
-            Path path = Paths.get(outputDir, outputFileName);
-            FileUtilities.writeLinesToFile(path.toFile(), numberOfCustomers, numberOfSalesmen, mostExpensiveSaleId, worstSalesmanName);
-
-            log.info("Report created: {}", path.toFile().getAbsolutePath());
-
+            createReport(salesData, outputFileName);
         } catch (Exception e) {
             String errorMessage = String.format("Could not process the file %s", file.getAbsolutePath());
             log.error(errorMessage, e);
         }
+    }
+
+    /**
+     * Create the report file.
+     *
+     * @param salesData the {@link SalesData} representing all models read from file
+     * @param outputFileName the report file
+     * @throws IOException
+     */
+    private void createReport(SalesData salesData, String outputFileName) throws IOException {
+        String numberOfCustomers = String.format("Quantidade de clientes no arquivo de entrada: %s", Reports.getNumberOfCustomers(salesData));
+        String numberOfSalesmen = String.format("Quantidade de vendedor no arquivo de entrada: %s", Reports.getNumberOfSalesmen(salesData));
+        String mostExpensiveSaleId = String.format("ID da venda mais cara: %s", Reports.getMostExpensiveSale(salesData).getSaleId());
+        String worstSalesmanName = String.format("Pior vendedor: %s", Reports.getWorstSalesman(salesData));
+
+        Path path = Paths.get(outputDir, outputFileName);
+        FileUtilities.writeLinesToFile(path.toFile(), numberOfCustomers, numberOfSalesmen, mostExpensiveSaleId, worstSalesmanName);
+        log.info("Report created: {}", path.toFile().getAbsolutePath());
     }
 
     /**
