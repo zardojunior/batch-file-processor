@@ -6,6 +6,7 @@ import org.junit.Test;
 import br.com.fileprocessor.converter.CustomerConverter;
 import br.com.fileprocessor.converter.SaleConverter;
 import br.com.fileprocessor.converter.SalesmanConverter;
+import br.com.fileprocessor.exception.ConverterNotFoundException;
 
 public class ConverterFactoryTest {
 
@@ -14,7 +15,12 @@ public class ConverterFactoryTest {
         Assert.assertTrue(ConverterFactory.create("001") instanceof SalesmanConverter);
         Assert.assertTrue(ConverterFactory.create("002") instanceof CustomerConverter);
         Assert.assertTrue(ConverterFactory.create("003") instanceof SaleConverter);
-        Assert.assertNull(ConverterFactory.create("004"));
+        Assert.assertNull(ConverterFactory.create("XXX"));
+    }
+
+    @Test(expected = ConverterNotFoundException.class)
+    public void testCreateThrowsException() {
+        Assert.assertNull(ConverterFactory.createThrowsException("XXX"));
     }
 
 }
