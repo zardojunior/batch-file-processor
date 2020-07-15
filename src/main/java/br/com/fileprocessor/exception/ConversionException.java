@@ -1,6 +1,6 @@
 package br.com.fileprocessor.exception;
 
-public class ConversionException extends RuntimeException {
+public class ConversionException extends ProcessorException {
 
     private static final long serialVersionUID = 1528581148540107575L;
 

@@ -1,6 +1,6 @@
 package br.com.fileprocessor.exception;
 
-public class ParseException extends RuntimeException {
+public class ParseException extends ProcessorException {
 
     private static final long serialVersionUID = -162015653558943623L;
 
