@@ -59,4 +59,19 @@ public class FileUtilities {
                 Arrays.asList(lines));
     }
 
+    /**
+     * Check if the file exists, is a normal file (not a directory)
+     * and if the application can read.
+     *
+     * @param file the file to check
+     * @return <code>true</code> if the file exists,
+     *         is a normal file and can be read
+     */
+    public static boolean isFileAccessible(File file) {
+        return file != null
+                && file.exists()
+                && file.isFile()
+                && file.canRead();
+    }
+
 }
