@@ -62,7 +62,7 @@ public class Reports {
 
         // Grouping sales per salesman name
         Map<String, List<Sale>> salesGroupBySalesmanName = data.getModelsOfType(Sale.TYPE)
-                .stream()
+                .parallelStream()
                 .map(s -> (Sale)s)
                 .collect(Collectors.groupingBy(Sale::getSalesmanName));
 
@@ -73,7 +73,7 @@ public class Reports {
         }
 
         // Sorting per value (ascending)
-        Optional<Map.Entry<String,BigDecimal>> sortedTotals = totalPerSalesmanName.entrySet().stream()
+        Optional<Map.Entry<String,BigDecimal>> sortedTotals = totalPerSalesmanName.entrySet().parallelStream()
                 .sorted(Map.Entry.comparingByValue()).findFirst();
 
         if (sortedTotals.isPresent()) {
@@ -102,7 +102,7 @@ public class Reports {
      */
     public static final Collection<String> getAllSalesmanNames(SalesData data) {
         return data.getModelsOfType(Salesman.TYPE)
-                .stream()
+                .parallelStream()
                 .map(s -> (Salesman)s)
                 .map(Salesman::getName)
                 .collect(Collectors.toSet());
@@ -116,7 +116,7 @@ public class Reports {
      */
     public static final Collection<String> getAllSalesmanNamesWithSales(SalesData data) {
         return data.getModelsOfType(Sale.TYPE)
-                .stream()
+                .parallelStream()
                 .map(s -> (Sale)s)
                 .map(Sale::getSalesmanName)
                 .collect(Collectors.toSet());
@@ -129,7 +129,7 @@ public class Reports {
      * @return the sum of sales total prices
      */
     private static final BigDecimal getTotalSalesPrice(List<Sale> sales) {
-        return sales.stream()
+        return sales.parallelStream()
                 .map(Sale::getTotalPrice)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
@@ -142,7 +142,7 @@ public class Reports {
      */
     public static final Sale getMostExpensiveSale(SalesData data) {
         return data.getModelsOfType(Sale.TYPE)
-                .stream()
+                .parallelStream()
                 .map(m -> (Sale)m)
                 .max(Comparator.comparing(Sale::getTotalPrice))
                 .get();
