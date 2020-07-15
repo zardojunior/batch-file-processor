@@ -34,7 +34,7 @@ public class FileProcessorTest {
     @Test
     public void testProcess() throws IOException {
         File file = inputFilenamePath.toFile();
-        FileProcessor processor = new FileProcessor(FileUtils.getTempDirectoryPath(), ".done.dat");
+        FileProcessor processor = new FileProcessor(FileUtils.getTempDirectoryPath(), ".done.dat", true);
         processor.process(file);
         Assert.assertTrue(isFileAccessible(outputFilenamePath.toFile()));
     }

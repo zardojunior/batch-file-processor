@@ -23,7 +23,7 @@ public class ReportsTest {
     @Before
     public void before() throws IOException {
         File file = getFileFromResources(INPUT_FILENAME);
-        this.salesData = new FileProcessor().buildSalesData(file);
+        this.salesData = new FileProcessor(true).buildSalesData(file);
     }
 
     @Test

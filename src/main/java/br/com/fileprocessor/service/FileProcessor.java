@@ -8,7 +8,6 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
@@ -19,6 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import br.com.fileprocessor.converter.Converter;
+import br.com.fileprocessor.exception.ProcessorException;
 import br.com.fileprocessor.factory.ConverterFactory;
 import br.com.fileprocessor.factory.ParserFactory;
 import br.com.fileprocessor.model.Model;
@@ -33,14 +33,18 @@ public class FileProcessor implements Processor<File> {
 
     private String outputDir;
     private String outputFileExtension;
+    private boolean continueOnUnkownRow;
 
-    public FileProcessor() {
-        // Empty constructor
+    private Map<String, Set<Model>> modelMap = new HashMap<>();
+
+    public FileProcessor(boolean continueOnUnkownRow) {
+        this.continueOnUnkownRow = continueOnUnkownRow;
     }
 
-    public FileProcessor(String outputDir, String outputFileExtension) {
+    public FileProcessor(String outputDir, String outputFileExtension, boolean continueOnUnkownRow) {
         this.outputDir = outputDir;
         this.outputFileExtension = outputFileExtension;
+        this.continueOnUnkownRow = continueOnUnkownRow;
     }
 
     @Override
@@ -75,24 +79,36 @@ public class FileProcessor implements Processor<File> {
      * @throws IOException
      */
     public SalesData buildSalesData(File file) throws IOException {
-        Map<String, Set<Model>> modelMap = new HashMap<>();
         try (LineIterator iterator = FileUtils.lineIterator(file, StandardCharsets.UTF_8.toString())) {
             while (iterator.hasNext()) {
-                String line = iterator.nextLine();
-                if (line != null && line.length() > TYPE_LENGTH) {
-                    String type = StringUtils.substring(line, 0, TYPE_LENGTH);
-                    Parser<String, String[]> parser = ParserFactory.create(type);
-                    Objects.requireNonNull(parser, "No parser found on factory to parse row " + line);
-                    Converter<String[], Model> converter = ConverterFactory.create(type);
-                    Objects.requireNonNull(parser, "No converter found on factory to convert row " + line);
-                    Model model = converter.convert(parser.parse(line));
-                    addModelToMap(model, modelMap);
-                } else {
-                    log.warn("Format of line is unknown. Ignoring! {}", line);
+                String row = iterator.nextLine();
+                if (StringUtils.isNotBlank(row)) {
+                    processRow(row);
                 }
             }
         }
         return new SalesData(modelMap);
+    }
+
+    /**
+     * Process a row.
+     *
+     * @param row the row to be processed
+     */
+    private void processRow(String row) {
+        try {
+            String type = StringUtils.substring(row, 0, TYPE_LENGTH);
+            Parser<String, String[]> parser = ParserFactory.createThrowsException(type);
+            Converter<String[], Model> converter = ConverterFactory.createThrowsException(type);
+            Model model = converter.convert(parser.parse(row));
+            addModelToMap(model, modelMap);
+        } catch (ProcessorException e) {
+            if (!continueOnUnkownRow) {
+                throw e;
+            }
+            String warnMessage = String.format("Skipping row %s: %s", row, e.getMessage());
+            log.warn(warnMessage);
+        }
     }
 
     /**

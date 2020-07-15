@@ -23,6 +23,9 @@ outputFileExtension: .done.dat
 # The amount of time in seconds to wait between checks of the input directory
 poolingIntervalInSeconds: 20
 
+# Continue to parse the file when a row is not recognized 
+continueOnUnkownRow: true
+
 ```
 
 2) Start the application and pass (or not) the configuration file created above as an argument
